@@ -1,13 +1,14 @@
 .DiaryEditor {
-  text-align: center;
-  width: 100%;
   border-bottom: 1px solid #757575;
-  padding: 50px;
   background: grey;
+  text-align: center;
+  padding: 50px;
+  margin: 0;
 }
 
-.DiaryEditor h2 {
+h2 {
   font-size: 50px;
+  text-align: center;
 }
 
 .DiaryEditor input,
@@ -41,4 +42,36 @@ textarea {
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+}
+
+/* DiaryList */
+.DiaryList {
+  text-align: center;
+  border-bottom: 1px solid #757575;
+  text-align: start;
+  padding: 50px;
+  margin: 0;
+}
+
+/* DiaryItem */
+.DiaryItem {
+  background: rgba(240, 240, 240, 0.7);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.DiaryItem .author {
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.DiaryItem .date {
+  color: grey;
+  margin-top: 5px;
+}
+
+.DiaryItem .content {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 18px;
 }
