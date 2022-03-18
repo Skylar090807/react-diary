@@ -1,16 +1,16 @@
 import React, { useRef, useState } from 'react'
 
-const DiaryEditor = () => {
+const DiaryEditor = ({ onCreate }) => {
+  const [state, setState] = useState({
+    author: '',
+    content: '',
+    emotion: 1,
+  })
+
   //const authorInput: React.MutableRefObject<undefined>
   //useRef를 사용하여 React.MutableRefObject에 접근할 수 있게 되었다.
   const authorInput = useRef()
   const contentInput = useRef()
-
-  const [state, setState] = useState({
-    author: '',
-    content: '',
-    emotion: '😭',
-  })
 
   const handleChangeState = (event) => {
     console.log('name : ', event.target.name)
@@ -31,7 +31,15 @@ const DiaryEditor = () => {
       contentInput.current.focus()
       return
     }
+
+    onCreate(state.author, state.content, state.emotion)
     alert('Successfully saved')
+    setState({
+      //저장 후 초기화
+      author: '',
+      content: '',
+      emotion: 1,
+    })
   }
 
   return (
@@ -47,11 +55,11 @@ const DiaryEditor = () => {
       <div>
         <span>Today's Emotion </span>
         <select name="emotion" value={state.emotion} onChange={handleChangeState}>
-          <option value={1}>😭</option>
-          <option value={2}>😥</option>
-          <option value={3}>😐</option>
-          <option value={4}>😀</option>
-          <option value={5}>😆</option>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
         </select>
       </div>
       <div>
