@@ -4,7 +4,7 @@ const DiaryEditor = ({ onCreate }) => {
   const [state, setState] = useState({
     author: '',
     content: '',
-    emotion: 1,
+    emotion: '😐',
   })
 
   //const authorInput: React.MutableRefObject<undefined>
@@ -33,12 +33,12 @@ const DiaryEditor = ({ onCreate }) => {
     }
 
     onCreate(state.author, state.content, state.emotion)
-    alert('Successfully saved')
+    alert('저장된 일기는 아래 Diary List에서 확인할 수 있습니다.')
     setState({
       //저장 후 초기화
       author: '',
       content: '',
-      emotion: 1,
+      emotion: '😐',
     })
   }
 
@@ -55,11 +55,11 @@ const DiaryEditor = ({ onCreate }) => {
       <div>
         <span>Today's Emotion </span>
         <select name="emotion" value={state.emotion} onChange={handleChangeState}>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
+          <option value={'😭'}>😭</option>
+          <option value={'😅'}>😅</option>
+          <option value={'😐'}>😐</option>
+          <option value={'🤬'}>🤬</option>
+          <option value={'😆'}>😆</option>
         </select>
       </div>
       <div>
