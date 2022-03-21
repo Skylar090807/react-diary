@@ -2,6 +2,7 @@ import { Fragment, useRef, useState } from 'react'
 import './App.css'
 import DiaryEditor from './components/diaryEditor'
 import DiaryList from './components/diaryList'
+import Lifecycle from './components/Lifecycle'
 
 const App = () => {
   const [data, setData] = useState([])
@@ -34,6 +35,7 @@ const App = () => {
 
   return (
     <Fragment>
+      <Lifecycle />
       <DiaryEditor onCreate={onCreate} />
       <DiaryList diaryList={data} onRemove={onRemove} onEdit={onEdit} />
     </Fragment>
