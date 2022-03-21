@@ -1,50 +1,31 @@
 import React, { useEffect, useState } from 'react'
 
-const Lifecycle = () => {
-  const [count, setCount] = useState(0)
-  const [text, setText] = useState('')
-
+const UnmountTest = () => {
   useEffect(() => {
     console.log('Mount!')
+
+    return () => {
+      //Unmount 시점에 실행된다.
+      console.log('Unmount!')
+    }
   }, [])
 
-  useEffect(() => {
-    console.log('Update!')
-  })
+  return <div>Unmount Testing Component</div>
+}
 
-  useEffect(() => {
-    console.log(`count 변경! : ${count}`)
-  }, [count])
+const Lifecycle = () => {
+  const [isVisible, setIsVisible] = useState(false)
 
-  useEffect(() => {
-    console.log(`text 변경! : ${text}`)
-  }, [text])
-
-  useEffect(() => {
-    console.log(`count 변경! : ${count}`)
-    if (count > 5) {
-      alert('count가 5 이상입니다. 1로 초기화합니다.')
-      setCount(1)
-    }
-  }, [count])
-
-  const CountHandler = () => {
-    setCount(count + 1)
-  }
-
-  const TextHandler = (e) => {
-    setText(e.target.value)
+  const toggle = () => {
+    setIsVisible(!isVisible)
   }
 
   return (
     <div style={{ padding: '20px' }}>
-      <div>
-        {count}
-        <button onClick={CountHandler}>+ </button>
-      </div>
-      <div>
-        <input value={text} onChange={TextHandler} />
-      </div>
+      <button onClick={toggle}>On/Off</button>
+
+      {/* 단락회로 평가로 isVisible이 true이면 <UnmountTest />가 mount되어 렌더되고, flase이면 unmount로 렌더되지 않는다. */}
+      {isVisible && <UnmountTest />}
     </div>
   )
 }
