@@ -63,6 +63,7 @@ const App = () => {
     setData(data.map((item) => (item.id === targetId ? { ...item, content: newContent } : item)))
   }
 
+  //emotion을 emoji 문자열 타입으로 넣어서 아래 getDiaryAnalysis 함수는 제대로 작동하지 않는다.
   const getDiaryAnalysis = useMemo(() => {
     if (data.length === 0) {
       return { goodcount: 0, badCount: 0, goodRatio: 0 }
