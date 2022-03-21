@@ -18,6 +18,7 @@ const App = () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/comments').then((res) => res.json())
     console.log(res)
 
+    //data를 0~19까지 20개 가져온다.
     const initData = res.slice(0, 20).map((item) => {
       return {
         author: item.email,
