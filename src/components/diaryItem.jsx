@@ -7,6 +7,8 @@ const DiaryItem = ({ id, author, content, emotion, created_date, onRemove }) => 
   //toggleIsEdit이 호출되면 setIsEdit에서 인자로 받아온 not연산 !isEdit 반환
   const toggleIsEdit = () => setIsEdit(!isEdit)
 
+  const [localContent, setLocalContent] = useState(content)
+
   const handleRemove = () => {
     if (window.confirm(`확인을 누르면 ${id} 번째 일기가 삭제됩니다.`)) {
       onRemove(id)
@@ -23,14 +25,23 @@ const DiaryItem = ({ id, author, content, emotion, created_date, onRemove }) => 
       <div className="content">
         {isEdit ? (
           <Fragment>
-            <textarea />
+            <textarea value={localContent} onChange={(event) => setLocalContent(event.target.value)} />
           </Fragment>
         ) : (
           <Fragment>{content}</Fragment>
         )}
       </div>
-      <button onClick={handleRemove}>Remove</button>
-      <button onClick={toggleIsEdit}>Modification</button>
+      {isEdit ? (
+        <Fragment>
+          <button onClick={toggleIsEdit}>수정 취소</button>
+          <button>수정 완료</button>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <button onClick={handleRemove}>Remove</button>
+          <button onClick={toggleIsEdit}>Modification</button>
+        </Fragment>
+      )}
     </div>
   )
 }
