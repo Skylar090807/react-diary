@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import DiaryEditor from './components/diaryEditor'
 import DiaryList from './components/diaryList'
@@ -63,9 +63,27 @@ const App = () => {
     setData(data.map((item) => (item.id === targetId ? { ...item, content: newContent } : item)))
   }
 
+  const getDiaryAnalysis = useMemo(() => {
+    if (data.length === 0) {
+      return { goodcount: 0, badCount: 0, goodRatio: 0 }
+    }
+    console.log('일기 분석 시작')
+
+    const goodCount = data.filter((it) => it.emotion >= 3).length
+    const badCount = data.length - goodCount
+    const goodRatio = (goodCount / data.length) * 100.0
+    return { goodCount, badCount, goodRatio }
+  }, [data.length])
+
+  const { goodCount, badCount, goodRatio } = getDiaryAnalysis
+
   return (
     <Fragment>
       <DiaryEditor onCreate={onCreate} />
+      <div>전체 일기: {data.length} 개</div>
+      <div>기분 좋은 날: {goodCount}</div>
+      <div>기분 나쁜 날: {badCount}</div>
+      <div>기분 좋은 날 비율: {goodRatio}</div>
       <DiaryList diaryList={data} onRemove={onRemove} onEdit={onEdit} />
     </Fragment>
   )
