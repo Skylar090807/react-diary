@@ -21,7 +21,7 @@ function App() {
     setData([newItem]) // 스프레드 연산자 사용 시 react-dom.development.js:4091 Uncaught TypeError: data is not iterable
   }
 
-  const onDelete = (targetId) => {
+  const onRemove = (targetId) => {
     console.log(`${targetId}가 삭제되었습니다.`)
     const newDiaryList = data.filter((item) => item.id !== targetId)
     console.log(newDiaryList)
@@ -31,7 +31,7 @@ function App() {
   return (
     <Fragment>
       <DiaryEditor onCreate={onCreate} />
-      <DiaryList diaryList={data} onDelete={onDelete} />
+      <DiaryList diaryList={data} onRemove={onRemove} />
     </Fragment>
   )
 }
