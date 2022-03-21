@@ -3,8 +3,8 @@ import './App.css'
 import DiaryEditor from './components/diaryEditor'
 import DiaryList from './components/diaryList'
 
-function App() {
-  const [data, setData] = useState()
+const App = () => {
+  const [data, setData] = useState([])
 
   const dataId = useRef(0)
 
@@ -18,7 +18,7 @@ function App() {
       id: dataId.current,
     }
     dataId.current += 1
-    setData([newItem]) // 스프레드 연산자 사용 시 react-dom.development.js:4091 Uncaught TypeError: data is not iterable
+    setData([newItem, ...data])
   }
 
   const onRemove = (targetId) => {
