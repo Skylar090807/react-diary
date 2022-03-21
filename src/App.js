@@ -76,6 +76,8 @@ const App = () => {
     return { goodCount, badCount, goodRatio }
   }, [data.length])
 
+  //useMemo를 사용하게 되면 getDiaryAnalysis는 함수가 아니라 값을 반환하게 된다.
+  //따라서 getDiaryAnalysis()로 호출하면 function이 아니라는 에러가 발생한다.
   const { goodCount, badCount, goodRatio } = getDiaryAnalysis
 
   return (
