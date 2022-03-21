@@ -28,10 +28,14 @@ function App() {
     setData(newDiaryList)
   }
 
+  const onEdit = (targetId, newContent) => {
+    setData(data.map((item) => (item.id === targetId ? { ...item, content: newContent } : item)))
+  }
+
   return (
     <Fragment>
       <DiaryEditor onCreate={onCreate} />
-      <DiaryList diaryList={data} onRemove={onRemove} />
+      <DiaryList diaryList={data} onRemove={onRemove} onEdit={onEdit} />
     </Fragment>
   )
 }

@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 
-const DiaryItem = ({ id, author, content, emotion, created_date, onRemove }) => {
+const DiaryItem = ({ id, author, content, emotion, created_date, onRemove, onEdit }) => {
   //수정 중인지 수정 중이 아닌지 체크할 isEdit state 생성
   const [isEdit, setIsEdit] = useState(false)
 
@@ -9,9 +9,28 @@ const DiaryItem = ({ id, author, content, emotion, created_date, onRemove }) => 
 
   const [localContent, setLocalContent] = useState(content)
 
+  const localContentInput = useRef()
+
   const handleRemove = () => {
     if (window.confirm(`확인을 누르면 ${id} 번째 일기가 삭제됩니다.`)) {
       onRemove(id)
+    }
+  }
+
+  const handleQuitEdit = () => {
+    setIsEdit(false)
+    setLocalContent(content)
+  }
+
+  const handleEdit = () => {
+    if (localContent.length < 5) {
+      localContentInput.current.focus()
+      return
+    }
+
+    if (window.confirm(`확인을 누르면 ${id}번째 일기가 수정됩니다.`)) {
+      onEdit(id, localContent)
+      toggleIsEdit()
     }
   }
 
@@ -25,7 +44,11 @@ const DiaryItem = ({ id, author, content, emotion, created_date, onRemove }) => 
       <div className="content">
         {isEdit ? (
           <Fragment>
-            <textarea value={localContent} onChange={(event) => setLocalContent(event.target.value)} />
+            <textarea
+              ref={localContentInput}
+              value={localContent}
+              onChange={(event) => setLocalContent(event.target.value)}
+            />
           </Fragment>
         ) : (
           <Fragment>{content}</Fragment>
@@ -33,8 +56,8 @@ const DiaryItem = ({ id, author, content, emotion, created_date, onRemove }) => 
       </div>
       {isEdit ? (
         <Fragment>
-          <button onClick={toggleIsEdit}>수정 취소</button>
-          <button>수정 완료</button>
+          <button onClick={handleQuitEdit}>수정 취소</button>
+          <button onClick={handleEdit}>수정 완료</button>
         </Fragment>
       ) : (
         <Fragment>
