@@ -16,9 +16,9 @@ const CounterB = React.memo(({ obj }) => {
 
 const areEqual = (prevProps, nextProps) => {
   if (prevProps.obj.count === nextProps.obj.count) {
-    return true
+    return true // preProps와 nextProps 값이 같으면 리렌더링 하지 않는다.
   }
-  return false
+  return false // preProps와 nextProps 값이 같으면 리렌더링 한다.
 }
 
 const memoizeCounterB = React.memo(CounterB, areEqual)
