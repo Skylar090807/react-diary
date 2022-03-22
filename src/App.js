@@ -2,6 +2,7 @@ import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import DiaryEditor from './components/diaryEditor'
 import DiaryList from './components/diaryList'
+import OptimizeTest from './components/OptimizeTest'
 
 // https://jsonplaceholder.typicode.com/comments
 
@@ -82,6 +83,7 @@ const App = () => {
 
   return (
     <Fragment>
+      <OptimizeTest />
       <DiaryEditor onCreate={onCreate} />
       <div>전체 일기: {data.length} 개</div>
       <div>기분 좋은 날: {goodCount}</div>
