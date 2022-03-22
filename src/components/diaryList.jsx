@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { DiaryStateContext } from '../App'
 import DiaryItem from './diaryItem'
 
-const DiaryList = ({ diaryList, onRemove, onEdit }) => {
-  console.log(diaryList)
+// App.js에서 prop으로 받아 온 diaryList는 data state의 값이다.
+// createContext로 data state를 넘겨 받았으므로 더이상 props로 받아 올 필요 없다.
+
+const DiaryList = ({ onRemove, onEdit }) => {
+  const diaryList = useContext(DiaryStateContext)
 
   return (
     <div className="DiaryList">

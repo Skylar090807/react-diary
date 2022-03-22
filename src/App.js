@@ -117,7 +117,7 @@ const App = () => {
       <div>기분 좋은 날: {goodCount}</div>
       <div>기분 나쁜 날: {badCount}</div>
       <div>기분 좋은 날 비율: {goodRatio}</div>
-      <DiaryList diaryList={data} onRemove={onRemove} onEdit={onEdit} />
+      <DiaryList onRemove={onRemove} onEdit={onEdit} />
     </DiaryStateContext.Provider>
   )
 }
