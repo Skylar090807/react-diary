@@ -35,6 +35,7 @@ const reducer = (state, action) => {
 }
 
 export const DiaryStateContext = createContext()
+export const DiaryDispatchContext = createContext()
 
 const App = () => {
   const [data, dispatch] = useReducer(reducer, [])
@@ -92,6 +93,10 @@ const App = () => {
     })
   }, [])
 
+  const memoizedDispatches = useMemo(() => {
+    return { onCreate, onRemove, onEdit }
+  }, [])
+
   //useMemo()
   //emotion을 emoji 문자열 타입으로 넣어서 아래 getDiaryAnalysis 함수는 제대로 작동하지 않는다.
   const getDiaryAnalysis = useMemo(() => {
@@ -112,12 +117,14 @@ const App = () => {
 
   return (
     <DiaryStateContext.Provider value={data}>
-      <DiaryEditor onCreate={onCreate} />
-      <div>전체 일기: {data.length} 개</div>
-      <div>기분 좋은 날: {goodCount}</div>
-      <div>기분 나쁜 날: {badCount}</div>
-      <div>기분 좋은 날 비율: {goodRatio}</div>
-      <DiaryList onRemove={onRemove} onEdit={onEdit} />
+      <DiaryDispatchContext.Provider value={memoizedDispatches}>
+        <DiaryEditor onCreate={onCreate} />
+        <div>전체 일기: {data.length} 개</div>
+        <div>기분 좋은 날: {goodCount}</div>
+        <div>기분 나쁜 날: {badCount}</div>
+        <div>기분 좋은 날 비율: {goodRatio}</div>
+        <DiaryList onRemove={onRemove} onEdit={onEdit} />
+      </DiaryDispatchContext.Provider>
     </DiaryStateContext.Provider>
   )
 }
