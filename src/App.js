@@ -1,8 +1,7 @@
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import DiaryEditor from './components/diaryEditor'
 import DiaryList from './components/diaryList'
-import OptimizeTest from './components/OptimizeTest'
 
 // https://jsonplaceholder.typicode.com/comments
 
@@ -40,7 +39,7 @@ const App = () => {
     getData()
   }, [])
 
-  const onCreate = (author, content, emotion) => {
+  const onCreate = useCallback((author, content, emotion) => {
     const created_date = new Date().getTime()
     const newItem = {
       author,
@@ -50,8 +49,8 @@ const App = () => {
       id: dataId.current,
     }
     dataId.current += 1
-    setData([newItem, ...data])
-  }
+    setData((data) => [newItem, ...data])
+  }, [])
 
   const onRemove = (targetId) => {
     console.log(`${targetId}가 삭제되었습니다.`)
@@ -64,6 +63,7 @@ const App = () => {
     setData(data.map((item) => (item.id === targetId ? { ...item, content: newContent } : item)))
   }
 
+  //useMemo()
   //emotion을 emoji 문자열 타입으로 넣어서 아래 getDiaryAnalysis 함수는 제대로 작동하지 않는다.
   const getDiaryAnalysis = useMemo(() => {
     if (data.length === 0) {
@@ -83,7 +83,6 @@ const App = () => {
 
   return (
     <Fragment>
-      <OptimizeTest />
       <DiaryEditor onCreate={onCreate} />
       <div>전체 일기: {data.length} 개</div>
       <div>기분 좋은 날: {goodCount}</div>

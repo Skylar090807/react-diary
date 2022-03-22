@@ -1,6 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const DiaryEditor = ({ onCreate }) => {
+  //useEffect()를 이용해 컴포넌트 render 순간, 회수 확인 가능.
+  useEffect(() => {
+    console.log('DiaryEditor Render')
+  })
+
   const [state, setState] = useState({
     author: '',
     content: '',
@@ -69,4 +74,4 @@ const DiaryEditor = ({ onCreate }) => {
   )
 }
 
-export default DiaryEditor
+export default React.memo(DiaryEditor)
