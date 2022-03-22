@@ -53,10 +53,7 @@ const App = () => {
   }, [])
 
   const onRemove = useCallback((targetId) => {
-    console.log(`${targetId}가 삭제되었습니다.`)
-    const newDiaryList = data.filter((item) => item.id !== targetId)
-    console.log(newDiaryList)
-    setData(newDiaryList)
+    setData((data) => data.filter((item) => item.id !== targetId))
   }, [])
 
   const onEdit = (targetId, newContent) => {
