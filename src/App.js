@@ -56,9 +56,10 @@ const App = () => {
     setData((data) => data.filter((item) => item.id !== targetId))
   }, [])
 
-  const onEdit = (targetId, newContent) => {
-    setData(data.map((item) => (item.id === targetId ? { ...item, content: newContent } : item)))
-  }
+  const onEdit = useCallback((targetId, newContent) => {
+    // setData(data.map((item) => (item.id === targetId ? { ...item, content: newContent } : item)))
+    setData((data) => data.map((item) => (item.id === targetId ? { ...item, content: newContent } : item)))
+  }, [])
 
   //useMemo()
   //emotion을 emoji 문자열 타입으로 넣어서 아래 getDiaryAnalysis 함수는 제대로 작동하지 않는다.
