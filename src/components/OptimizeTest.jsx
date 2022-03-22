@@ -1,34 +1,36 @@
 import React, { useEffect, useState } from 'react'
 
-const Textview = React.memo(({ text }) => {
+const CounterA = React.memo(({ count }) => {
   useEffect(() => {
-    console.log(`update text: ${text}`)
-  })
-  return <div>{text}</div>
-})
-
-const Countview = React.memo(({ count }) => {
-  useEffect(() => {
-    console.log(`update count: ${count}`)
+    console.log(`CounterA updated count: ${count}`)
   })
   return <div>{count}</div>
 })
 
+const CounterB = React.memo(({ obj }) => {
+  useEffect(() => {
+    console.log(`CounterB updated obj: ${obj}`)
+  })
+  return <div>{obj.count}</div>
+})
+
 const OptimizeTest = () => {
   const [count, setCount] = useState(1)
-  const [text, setText] = useState('')
+  const [obj, setObj] = useState({
+    count: 1,
+  })
 
   return (
     <div style={{ padding: '50px' }}>
       <div>
-        <h2>count</h2>
-        <Countview count={count} />
-        <button onClick={() => setCount(count + 1)}>+</button>
+        <h2>counter A</h2>
+        <CounterA count={count} />
+        <button onClick={() => setCount(count)}>button A</button>
       </div>
       <div>
-        <h2>text</h2>
-        <Textview text={text} />
-        <input type={text} onChange={(event) => setText(event.target.value)} />
+        <h2>counter B</h2>
+        <CounterB obj={obj} />
+        <button onClick={() => setObj({ count: obj.count })}>button B</button>
       </div>
     </div>
   )
