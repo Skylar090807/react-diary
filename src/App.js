@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
+import { createContext, useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
 import './App.css'
 import DiaryEditor from './components/diaryEditor'
 import DiaryList from './components/diaryList'
@@ -34,8 +34,9 @@ const reducer = (state, action) => {
   }
 }
 
+export const DiaryStateContext = createContext()
+
 const App = () => {
-  // const [data, setData] = useState([])
   const [data, dispatch] = useReducer(reducer, [])
 
   const dataId = useRef(0)
@@ -110,14 +111,14 @@ const App = () => {
   const { goodCount, badCount, goodRatio } = getDiaryAnalysis
 
   return (
-    <Fragment>
+    <DiaryStateContext.Provider>
       <DiaryEditor onCreate={onCreate} />
       <div>전체 일기: {data.length} 개</div>
       <div>기분 좋은 날: {goodCount}</div>
       <div>기분 나쁜 날: {badCount}</div>
       <div>기분 좋은 날 비율: {goodRatio}</div>
       <DiaryList diaryList={data} onRemove={onRemove} onEdit={onEdit} />
-    </Fragment>
+    </DiaryStateContext.Provider>
   )
 }
 

@@ -17,3 +17,11 @@ API를 호출하고 원하는 데이터를 선택해 기본 데이터로 렌더�
 ### `useMemo`
 
 ### `useCallback`
+
+### `useReducer`
+
+### `useContext`
+
+## 성능 최적화 위한 React Component
+
+### `React.memo`
