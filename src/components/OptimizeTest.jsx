@@ -14,6 +14,15 @@ const CounterB = React.memo(({ obj }) => {
   return <div>{obj.count}</div>
 })
 
+const areEqual = (prevProps, nextProps) => {
+  if (prevProps.obj.count === nextProps.obj.count) {
+    return true
+  }
+  return false
+}
+
+const memoizeCounterB = React.memo(CounterB, areEqual)
+
 const OptimizeTest = () => {
   const [count, setCount] = useState(1)
   const [obj, setObj] = useState({
@@ -29,7 +38,7 @@ const OptimizeTest = () => {
       </div>
       <div>
         <h2>counter B</h2>
-        <CounterB obj={obj} />
+        <memoizeCounterB obj={obj} />
         <button onClick={() => setObj({ count: obj.count })}>button B</button>
       </div>
     </div>
