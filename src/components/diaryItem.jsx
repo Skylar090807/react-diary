@@ -1,6 +1,10 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 
 const DiaryItem = ({ id, author, content, emotion, created_date, onRemove, onEdit }) => {
+  useEffect(() => {
+    console.log(`${id}번째 아이템 렌더`)
+  })
+
   //수정 중인지 수정 중이 아닌지 체크할 isEdit state 생성
   const [isEdit, setIsEdit] = useState(false)
 
@@ -69,4 +73,4 @@ const DiaryItem = ({ id, author, content, emotion, created_date, onRemove, onEdi
   )
 }
 
-export default DiaryItem
+export default React.memo(DiaryItem)
