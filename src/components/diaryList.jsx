@@ -5,7 +5,7 @@ import DiaryItem from './diaryItem'
 // App.js에서 prop으로 받아 온 diaryList는 data state의 값이다.
 // createContext로 data state를 넘겨 받았으므로 더이상 props로 받아 올 필요 없다.
 
-const DiaryList = ({ onRemove, onEdit }) => {
+const DiaryList = ({}) => {
   const diaryList = useContext(DiaryStateContext)
 
   return (
@@ -14,7 +14,7 @@ const DiaryList = ({ onRemove, onEdit }) => {
       <h4>{diaryList.length} 개의 일기가 있습니다.</h4>
       <div>
         {diaryList.map((item, index) => (
-          <DiaryItem key={index} {...item} onRemove={onRemove} onEdit={onEdit} />
+          <DiaryItem key={index} {...item} />
         ))}
       </div>
     </div>

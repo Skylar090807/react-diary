@@ -118,12 +118,12 @@ const App = () => {
   return (
     <DiaryStateContext.Provider value={data}>
       <DiaryDispatchContext.Provider value={memoizedDispatches}>
-        <DiaryEditor onCreate={onCreate} />
+        <DiaryEditor />
         <div>전체 일기: {data.length} 개</div>
         <div>기분 좋은 날: {goodCount}</div>
         <div>기분 나쁜 날: {badCount}</div>
         <div>기분 좋은 날 비율: {goodRatio}</div>
-        <DiaryList onRemove={onRemove} onEdit={onEdit} />
+        <DiaryList />
       </DiaryDispatchContext.Provider>
     </DiaryStateContext.Provider>
   )

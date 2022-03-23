@@ -1,6 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { DiaryDispatchContext } from '../App'
 
-const DiaryEditor = ({ onCreate }) => {
+const DiaryEditor = () => {
+  const { onCreate } = useContext(DiaryDispatchContext)
+
   //useEffect()를 이용해 컴포넌트 render 순간, 회수 확인 가능.
   useEffect(() => {
     console.log('DiaryEditor Render')
